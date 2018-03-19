@@ -1,0 +1,5 @@
+.git/
+.idea/
+Lib/
+Scripts
+pip-selfcheck.json

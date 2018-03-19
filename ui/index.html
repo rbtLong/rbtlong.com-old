@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <title>rbtLong.com</title>
+
+    <link href="angular/angular-material.min.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <base href="/">
+</head>
+
+<body style="background-color: #f6f6f6;">
+
+    <!-- Angularjs -->
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular.min.js"></script>
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular-animate.min.js"></script>
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular-aria.min.js"></script>
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular-cookies.min.js"></script>
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular-loader.min.js"></script>
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular-messages.min.js"></script>
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular-message-format.js"></script>
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular-mocks.js"></script>
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular-parse-ext.min.js"></script>
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular-resource.min.js"></script>
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular-route.min.js"></script>
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular-sanitize.min.js"></script>
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular-touch.js"></script>
+    <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular-ui-router.min.js"></script>
+
+    <!-- Angularjs Material Design -->
+    <script type="text/javascript" language="javascript" src="angular/angular-material.min.js"></script>
+
+    <!-- app -->
+    <script type="text/javascript" language="javascript" src="_app/app.js"></script>
+    <script type="text/javascript" language="javascript" src="_app/app.ctrl.js"></script>
+
+    <!-- home -->
+    <script type="text/javascript" language="javascript" src="_app/home/home.ctrl.js"></script>
+
+    <!-- menu -->
+    <script type="text/javascript" language="javascript" src="_app/_menu/main-menu.ctrl.js"></script>
+    <script type="text/javascript" language="javascript" src="_app/_menu/main-menu.dir.js"></script>
+
+
+    <ng-container layout="column" ng-controller="ctrlApp as vm">
+
+        <main-menu></main-menu>
+        <div ng-view> </div>
+
+        <div style="margin-bottom: 150px;"></div>
+
+    </ng-container>
+
+</body>
+
+</html>

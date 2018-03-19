@@ -1,0 +1,92 @@
+<style>
+
+    .main-menu {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
+
+    .main-menu-inner {
+        position: relative;
+        text-align: center;
+        margin: auto;
+    }
+
+    .main-menu-inner ul {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        list-style-type: none;
+    }
+
+    .main-menu-inner ul li {
+        margin: auto .25em;
+        display: inline-block;
+        font-size: 1.35em;
+    }
+
+    .main-menu-container {
+        display: inline-block;
+        background: rgba(60, 60, 60, 0.25);
+        border: 2px solid #626262;
+        border-left: 0;
+        border-right: 0;
+        border-radius: .25em;
+        padding: 1em;
+        margin-bottom: 2em;
+    }
+
+    .menu-title {
+        position: absolute;
+        top: -.95em;
+        width: 100%;
+    }
+
+    .menu-title-inner {
+        font-size: 1.15em;
+        background: rgba(255,255,255,.90);
+        display: inline-block;
+        margin: auto 1em;
+        padding: auto 1em;
+        border: 1px solid #626262;
+        font-weight: bold;
+    }
+
+</style>
+
+<div class="main-menu">
+
+    <div class="main-menu-inner">
+
+
+        <div class="menu-title">
+            <div class="menu-title-inner">
+                <div style="margin: .1em .25em;">
+                    Main Menu
+                </div>
+            </div>
+        </div>
+
+        <div class="main-menu-container">
+            <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/projects">Projects</a>
+                </li>
+                <li>
+                    <a href="/skills">Skills</a>
+                </li>
+                <li>
+                    <a href="/activities">Activities</a>
+                </li>
+                <li>
+                    <a href="/about">About</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
