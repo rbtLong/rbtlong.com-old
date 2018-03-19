@@ -2,5 +2,12 @@
   "port": 5071,
   "host": "0.0.0.0",
   "env": "test",
-  "db_main": ""
+  "db": {
+    "main": {
+      "user": "",
+      "password": "",
+      "host": "",
+      "database": ""
+    }
+  }
 }
