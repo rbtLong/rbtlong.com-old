@@ -71,9 +71,11 @@
             </md-card-header>
             <md-card-content>
 
-                <div style="height: 300px;">
-
-                </div>
+                <md-list>
+                    <md-list-item ng-repeat="s in vm.skills.data" flex>
+                        {{ s.name }}
+                    </md-list-item>
+                </md-list>
 
             </md-card-content>
         </md-card>
