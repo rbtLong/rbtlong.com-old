@@ -3,5 +3,11 @@
   "host": "0.0.0.0",
   "env": "test",
   "db": {
+    "main": {
+      "user": "",
+      "password": "",
+      "host": "",
+      "database": ""
+    }
   }
 }
