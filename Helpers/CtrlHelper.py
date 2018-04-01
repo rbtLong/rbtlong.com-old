@@ -1,6 +1,4 @@
-import json
-
-from flask import Response
+from flask import Response, json
 
 
 def Resp(data, mime='application/json'):
