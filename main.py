@@ -1,9 +1,10 @@
 import json
-import mysql.connector
 
+import mysql.connector
 from flask import Flask
 
 from Core import corebp
+from Db.Db import Db
 
 app = Flask(__name__)
 
@@ -20,23 +21,22 @@ def db_main_test(db_main):
 
 if __name__ == '__main__':
 
+    Db.init()
+
     try:
-        print("Parsing Server.json")
         data = json.load(open('server.json'))
         host = data['host']
         port = data['port']
         env = data['env']
-        db_main = data['db']['main']
-
-        try:
-            db_main_test(db_main)
-        except ConnectionError as dberr:
-            print(f"[db_main] Failed to connect: {dberr}")
+        print(f'[App Config] app config parsed')
 
         debug = env == 'prod'
         print(f"running on host={host} port={port} debug={debug}")
+
         app.register_blueprint(corebp)
         app.run(host=host, port=port, debug=debug)
 
     except IOError as e:
-        print(f"Error: {e.errno} {e.strerror}")
+        print(f"[Config] Error: {e.errno} {e.strerror}")
+
+

@@ -17,18 +17,15 @@ class DbConn(object):
                 password=self.inf['password'],
                 host=self.inf['host'],
                 database=self.inf['database'])
-
-            cb(cnx)
-
-        except ConnectionError as dberr:
-            print(f"[Core] Failed to connect: {dberr}")
+            return cb(cnx)
 
         finally:
             if cnx is not None:
                 cnx.close()
+            else:
+                return None
 
-    @staticmethod
-    def rows(cb, cmd, params):
+    def rows(self, cb, cmd, params):
         def _m(cnx):
             curs = cnx.cursor(dictionary=True)
             curs.execute(cmd, params)
@@ -36,6 +33,6 @@ class DbConn(object):
             results = []
             for row in curs:
                 results.append(row)
-            cb(results)
+            return cb(results)
 
-        return Db.connect(_m)
+        return self.connect(_m)

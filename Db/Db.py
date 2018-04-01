@@ -8,9 +8,14 @@ class Db(object):
 
     @staticmethod
     def init():
-        data = json.load(open('server.json'))
-        Db.db_main = data['db']['main']
-        print('db info initialized')
+        try:
+            data = json.load(open('server.json'))
+            Db.db_main = data['db']['main']
+            print('[Db Config Main] db info initialized')
+
+        except ConnectionError as e:
+            print(f'[Db Config Main] Error {e.errno} {e.strerror}')
+            raise
 
     @staticmethod
     def Main():
