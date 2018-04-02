@@ -10,20 +10,37 @@
 
     .skills-comfort {
         overflow-y: auto;
-        margin: .15em auto;
+        height: 40vh;
+        margin: .05em auto;
         width: 100%;
-        height: 375px;
     }
 
     .skills-comfort-item {
         margin: 10px 3px;
     }
 
+    .outer-card {
+        border-radius: .5em .5em 0 0;
+    }
+
+
+    .outer-card-header {
+        border-radius: .5em .5em 0 0;
+        background: #e86d27;
+        color: #f6f6f6;
+    }
+
+    .outer-card-content {
+        background: #ededed;
+        height: 100%;
+    }
+
 </style>
 
 <div layout="column" class="home">
 
-    <md-card>
+
+    <md-card md-whiteframe="6" style="border-radius: 1em; margin: 3em 5em;">
         <md-card-title>
             <md-card-title-text>
                 <div style="text-align: center; font-size: 3em; margin: .20em auto;">
@@ -41,8 +58,8 @@
 
     <div layout="row">
 
-        <md-card flex="70">
-            <md-card-header>
+        <md-card md-whiteframe="2" class="outer-card" flex="70" >
+            <md-card-header class="outer-card-header">
                 <md-card-avatar>
                     <md-icon>assignment</md-icon>
                 </md-card-avatar>
@@ -57,37 +74,47 @@
                     </div>
                 </md-card-title-text>
             </md-card-header>
-            <md-card-content>
+            <md-card-content class="outer-card-content">
 
                 <div style="min-height: 300px;">
 
-                    <div style="margin: 2.5em 1em;" ng-repeat="p in vm.projects.data">
-                        <div style="font-size: 1.75em; ">
-                            {{ p.title }}
-                        </div>
-
-                        <div style="margin: .25em 1em;">
-
-                            <div style="margin: 1em auto;">
-                                <div layout="row" layout-align="start space-between">
-                                    <div style="height: 125px; width: 125px; border: 1px solid black; margin: auto .25em;"
-                                         ng-repeat="img in p.preview_imgs track by $index">
-                                        {{ $index }}
+                    <div style="margin: 2em auto;" ng-repeat="p in vm.projects.data track by $index">
+                        <md-card md-whiteframe="6">
+                            <md-card-header>
+                                <md-card-title-text>
+                                    <div style="font-size: 1.65em; font-weight: bold">
+                                        {{ p.title }}
                                     </div>
-                                </div>
-                            </div>
+                                </md-card-title-text>
+                            </md-card-header>
+                            <md-card-content>
 
-                            <div style="font-size: 1.25em;">
-                                {{ p.preview_description }}
-                            </div>
+                                <div style="margin: .25em 1em;">
 
-                            <div style="margin: 1em auto;">
-                                <b>Tags: </b>
-                                <span style="margin: auto .25em;" ng-repeat="t in p.tags">
+                                    <div style="margin: 1em auto; overflow-x: auto;">
+                                        <div layout="row" layout-align="start space-between">
+                                            <div style="margin: 1em .75em;"
+                                                 ng-repeat="img in vm.projects.get_imgs(p.name) track by $index" md-whiteframe="2">
+                                                <img style="max-height: 256px; " alt="" src="{{ img.src }}" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="font-size: 1.25em;">
+                                        {{ p.preview_description }}
+                                    </div>
+
+                                    <div style="margin: 1em auto;">
+                                        <b>Tags: </b>
+                                        <span style="margin: auto .25em;" ng-repeat="t in p.tags track by $index">
                                     <a href="/tags?#!t={{ t }}">{{ t }}</a><span ng-if="!$last">,</span>
                                 </span>
-                            </div>
-                        </div>
+                                    </div>
+                                </div>
+
+                            </md-card-content>
+                        </md-card>
+
                     </div>
 
                 </div>
@@ -98,8 +125,8 @@
 
         <div layout="column" flex="30">
 
-            <md-card flex>
-                <md-card-header>
+            <md-card md-whiteframe="2" class="outer-card" flex="none">
+                <md-card-header class="outer-card-header">
                     <md-card-avatar>
                         <md-icon>brush</md-icon>
                     </md-card-avatar>
@@ -114,33 +141,39 @@
                         </div>
                     </md-card-title-text>
                 </md-card-header>
-                <md-card-content>
+                <md-card-content class="outer-card-content">
 
                     <div layout="column">
-                        <md-input-container>
-                            <label>Search Skills</label>
-                            <input type="text" ng-model="vm.skills.q"/>
-                        </md-input-container>
 
-                        <div class="skills-comfort" flex>
-                            <div ng-repeat="s in vm.skills.data | filter: vm.skills.q | orderBy:'comfort_level':true"
-                                 class="skills-comfort-item">
-                                <div>
-                                    <b>{{ s.name }}</b> - {{ s.comfort }}
+                        <md-card md-whiteframe="6">
+                            <md-card-content>
+                                <div layout="column">
+                                    <md-input-container>
+                                        <label>Search Skills</label>
+                                        <input type="text" ng-model="vm.skills.q"/>
+                                    </md-input-container>
+
+                                    <div class="skills-comfort" flex>
+                                        <div ng-repeat="s in vm.skills.data | filter: vm.skills.q | orderBy:'comfort_level':true"
+                                             class="skills-comfort-item">
+                                            <div>
+                                                <b>{{ s.name }}</b> - {{ s.comfort }}
+                                            </div>
+                                            <md-progress-linear md-mode="determinate"
+                                                                value="{{ vm.skills.get_comfort_percent(s) }}"></md-progress-linear>
+                                        </div>
+                                    </div>
                                 </div>
-                                <md-progress-linear md-mode="determinate"
-                                                    value="{{ vm.skills.get_comfort_percent(s) }}"></md-progress-linear>
-                            </div>
-                        </div>
-
+                            </md-card-content>
+                        </md-card>
 
                     </div>
 
                 </md-card-content>
             </md-card>
 
-            <md-card flex>
-                <md-card-header>
+            <md-card md-whiteframe="2" class="outer-card" flex>
+                <md-card-header class="outer-card-header">
                     <md-card-avatar>
                         <md-icon>golf_course</md-icon>
                     </md-card-avatar>
@@ -155,7 +188,7 @@
                         </div>
                     </md-card-title-text>
                 </md-card-header>
-                <md-card-content>
+                <md-card-content class="outer-card-content">
 
                     <div style="height: 300px;">
 
@@ -164,8 +197,8 @@
                 </md-card-content>
             </md-card>
 
-            <md-card flex>
-                <md-card-header>
+            <md-card md-whiteframe="2" class="outer-card" flex>
+                <md-card-header class="outer-card-header">
                     <md-card-avatar>
                         <md-icon>school</md-icon>
                     </md-card-avatar>
@@ -180,7 +213,7 @@
                         </div>
                     </md-card-title-text>
                 </md-card-header>
-                <md-card-content>
+                <md-card-content class="outer-card-content">
 
                 </md-card-content>
             </md-card>

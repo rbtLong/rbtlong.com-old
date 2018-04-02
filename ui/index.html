@@ -10,7 +10,7 @@
     <base href="/">
 </head>
 
-<body style="background-color: #f6f6f6;">
+<body >
 
     <!-- Angularjs -->
     <script type="text/javascript" language="javascript" src="angular/angular-1.6.9/angular.min.js"></script>
@@ -43,14 +43,16 @@
     <script type="text/javascript" language="javascript" src="_app/_menu/main-menu.dir.js"></script>
 
 
-    <ng-container layout="column" ng-controller="ctrlApp as vm">
+    <md-content style="background-color: #e2e2e2;">
+        <ng-container ng-controller="ctrlApp as vm">
 
-        <main-menu></main-menu>
-        <div ng-view> </div>
+            <main-menu></main-menu>
+            <div ng-view> </div>
 
-        <div style="margin-bottom: 150px;"></div>
+            <div style="margin-bottom: 150px;"></div>
 
-    </ng-container>
+        </ng-container>
+    </md-content>
 
 </body>
 
