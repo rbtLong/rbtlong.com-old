@@ -58,69 +58,85 @@
 
     <div layout="row">
 
-        <md-card md-whiteframe="2" class="outer-card" flex="70" >
-            <md-card-header class="outer-card-header">
-                <md-card-avatar>
-                    <md-icon>assignment</md-icon>
-                </md-card-avatar>
-                <md-card-title-text>
-                    <div class="md-title">
+        <div layout="column" flex="70" >
+
+            <md-card md-whiteframe="2" class="outer-card">
+                <md-card-header class="outer-card-header">
+                    <md-card-avatar>
+                        <md-icon>assignment</md-icon>
+                    </md-card-avatar>
+                    <md-card-title-text>
+                        <div class="md-title">
                         <span class="ctitle">
                             Projects
                         </span>
-                    </div>
-                    <div class="md-subhead">
-                        These are some things I worked on at work and personally.
-                    </div>
-                </md-card-title-text>
-            </md-card-header>
-            <md-card-content class="outer-card-content">
+                        </div>
+                        <div class="md-subhead">
+                            These are some things I worked on at work and personally.
+                        </div>
+                    </md-card-title-text>
+                </md-card-header>
+                <md-card-content class="outer-card-content">
 
-                <div style="min-height: 300px;">
+                    <div style="min-height: 300px;">
 
-                    <div style="margin: 2em auto;" ng-repeat="p in vm.projects.data track by $index">
-                        <md-card md-whiteframe="6">
-                            <md-card-header>
-                                <md-card-title-text>
-                                    <div style="font-size: 1.65em; font-weight: bold">
-                                        {{ p.title }}
-                                    </div>
-                                </md-card-title-text>
-                            </md-card-header>
-                            <md-card-content>
+                        <div style="margin: 1em auto;" ng-repeat="p in vm.projects.data track by $index">
+                            <md-card md-whiteframe="4">
+                                <md-card-header>
+                                    <md-card-title-text>
+                                        <div style="font-size: 1.65em; font-weight: bold">
+                                            {{ p.title }}
+                                        </div>
+                                    </md-card-title-text>
+                                </md-card-header>
+                                <md-card-content>
 
-                                <div style="margin: .25em 1em;">
+                                    <div style="margin: .25em 1em;">
 
-                                    <div style="margin: 1em auto; overflow-x: auto;">
-                                        <div layout="row" layout-align="start space-between">
-                                            <div style="margin: 1em .75em;"
-                                                 ng-repeat="img in vm.projects.get_imgs(p.name) track by $index" md-whiteframe="2">
-                                                <img style="max-height: 256px; " alt="" src="{{ img.src }}" />
+                                        <div style="margin: 1em auto; overflow-x: auto;">
+                                            <div layout="row" layout-align="start space-between">
+                                                <div style="margin: 1em .75em;"
+                                                     ng-repeat="img in vm.projects.get_imgs(p.name) track by $index"
+                                                     md-whiteframe="2">
+                                                    <img style="max-height: 350px; " alt="" src="{{ img.src }}" />
+                                                </div>
                                             </div>
+                                        </div>
+
+                                        <div style="font-size: 1.25em;">
+                                            {{ p.preview_description }}
+                                        </div>
+
+                                        <div style="margin: 1em auto;">
+                                            <b>Tags: </b>
+                                            <span style="margin: auto .25em;" ng-repeat="t in p.tags track by $index">
+                                    <a href="/tags?#!t={{ t }}">{{ t }}</a><span ng-if="!$last">,</span>
+                                </span>
                                         </div>
                                     </div>
 
-                                    <div style="font-size: 1.25em;">
-                                        {{ p.preview_description }}
-                                    </div>
+                                </md-card-content>
+                            </md-card>
 
-                                    <div style="margin: 1em auto;">
-                                        <b>Tags: </b>
-                                        <span style="margin: auto .25em;" ng-repeat="t in p.tags track by $index">
-                                    <a href="/tags?#!t={{ t }}">{{ t }}</a><span ng-if="!$last">,</span>
-                                </span>
-                                    </div>
-                                </div>
-
-                            </md-card-content>
-                        </md-card>
+                        </div>
 
                     </div>
 
-                </div>
+                </md-card-content>
+            </md-card>
 
-            </md-card-content>
-        </md-card>
+            <md-card class="outer-card-content" style="height: auto;" md-whiteframe="2">
+                <md-card-title>
+                    <md-card-title-text>
+                        <div style="text-align: center; font-size: 1.2em; margin: .20em auto;">
+                            Copyright 2018 <b style="font-size: 1.05em;">rbtLong.com</b>.
+                        </div>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                </md-card-content>
+            </md-card>
+        </div>
 
 
         <div layout="column" flex="30">
@@ -145,27 +161,21 @@
 
                     <div layout="column">
 
-                        <md-card md-whiteframe="6">
-                            <md-card-content>
-                                <div layout="column">
-                                    <md-input-container>
-                                        <label>Search Skills</label>
-                                        <input type="text" ng-model="vm.skills.q"/>
-                                    </md-input-container>
+                        <md-input-container style="font-size: 1.35em;">
+                            <label>Search Skills</label>
+                            <input type="text" ng-model="vm.skills.q"/>
+                        </md-input-container>
 
-                                    <div class="skills-comfort" flex>
-                                        <div ng-repeat="s in vm.skills.data | filter: vm.skills.q | orderBy:'comfort_level':true"
-                                             class="skills-comfort-item">
-                                            <div>
-                                                <b>{{ s.name }}</b> - {{ s.comfort }}
-                                            </div>
-                                            <md-progress-linear md-mode="determinate"
-                                                                value="{{ vm.skills.get_comfort_percent(s) }}"></md-progress-linear>
-                                        </div>
-                                    </div>
+                        <div class="skills-comfort" flex>
+                            <div ng-repeat="s in vm.skills.data | filter: vm.skills.q | orderBy:'comfort_level':true"
+                                 class="skills-comfort-item">
+                                <div>
+                                    <b>{{ s.name }}</b> - {{ s.comfort }}
                                 </div>
-                            </md-card-content>
-                        </md-card>
+                                <md-progress-linear md-mode="determinate"
+                                                    value="{{ vm.skills.get_comfort_percent(s) }}"></md-progress-linear>
+                            </div>
+                        </div>
 
                     </div>
 
