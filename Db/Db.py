@@ -27,7 +27,6 @@ class Db(object):
 
             Db.db_main_test(Db.db_main)
 
-
         except ConnectionError as e:
             print(f'[Db Config Main] Error {e.errno} {e.strerror}')
             raise

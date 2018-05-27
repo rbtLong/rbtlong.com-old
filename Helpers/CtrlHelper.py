@@ -5,7 +5,9 @@ def Resp(data, mime='application/json'):
     return Response(json.dumps(data), mimetype=mime)
 
 
-def Succ(data, res={}):
+def Succ(data, res=None):
+    if res is None:
+        res = dict()
     res['success'] = 1
     res['content'] = data
     return Resp(res)
